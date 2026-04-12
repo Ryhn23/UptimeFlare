@@ -2,17 +2,18 @@ import { MaintenanceConfig, PageConfig, WorkerConfig } from './types/config'
 
 const pageConfig: PageConfig = {
   // 状态页的标题
-  title: "Ignorant's Status Page",
+  title: "Teleseon Status Page",
   // 状态页头部的链接
   links: [
-    { link: 'https://ignorant.top/', label: 'Blog', highlight: true },
-    { link: 'https://filecodebox.ignorant.top/#/', label: 'filecodebox' },
-    { link: 'https://openlist.ignorant.top/', label: 'OpenList' },
+    { link: 'https://teleseon.com/', label: 'mainpage', highlight: true },
+    { link: 'https://blog.teleseon.com/', label: 'blog' },
+    { link: 'https://cloud-mail.teleseon.com/login', label: 'mail' },
   ],
   // 对监控项进行分组显示
   group: {
-    '🌐 Ignorant的博客': ['ignorant_blog', ],
-    '📚 资源存储': ['ignorant_openlist','ignorant_filecodebox', ],
+    '🌐 Teleseon 主站': ['mainpage', ],
+    '📚 文章': ['blog','mail', ],
+ //   '📚 资源存储': ['blog','ignorant_filecodebox', ],
   },
   maintenances: {
     upcomingColor: 'gray',
@@ -25,12 +26,12 @@ const workerConfig: WorkerConfig = {
   monitors: [
     // 1. 博客监控项
     {
-      id: 'ignorant_blog',
-      name: 'Ignorant的博客',
+      id: 'mainpage',
+      name: 'Teleseon 主站',
       method: 'GET',
-      target: 'https://ignorant.top',
-      tooltip: '博客主页',
-      statusPageLink: 'https://ignorant.top',
+      target: 'https://teleseon.com/',
+      tooltip: '主站',
+      statusPageLink: 'https://teleseon.com/',
       hideLatencyChart: false,
       expectedCodes: [200],
       timeout: 10000,
@@ -40,12 +41,12 @@ const workerConfig: WorkerConfig = {
     },
     // 2. FileCodeBox 监控项
     {
-      id: 'ignorant_filecodebox',
-      name: 'FileCodeBox',
+      id: 'blog',
+      name: 'BLOG文章',
       method: 'GET',
-      target: 'https://filecodebox.ignorant.top/#/',
-      tooltip: '文件快递柜',
-      statusPageLink: 'https://filecodebox.ignorant.top/#/',
+      target: 'https://blog.teleseon.com/',
+      tooltip: '文章',
+      statusPageLink: 'https://blog.teleseon.com/',
       timeout: 10000,
       headers: {
         'User-Agent': 'Uptimeflare',
@@ -53,12 +54,12 @@ const workerConfig: WorkerConfig = {
     },
     // 3. OpenList 监控项
     {
-      id: 'ignorant_openlist',
-      name: 'OpenList',
+      id: 'mail',
+      name: 'Mail邮件',
       method: 'GET',
-      target: 'https://openlist.ignorant.top/',
-      tooltip: 'OpenList',
-      statusPageLink: 'https://openlist.ignorant.top/',
+      target: 'https://cloud-mail.teleseon.com/login',
+      tooltip: '邮件系统',
+      statusPageLink: 'https://cloud-mail.teleseon.com/login',
       timeout: 10000,
       headers: {
         'User-Agent': 'Uptimeflare',
