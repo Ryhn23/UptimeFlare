@@ -1,19 +1,14 @@
 import { MaintenanceConfig, PageConfig, WorkerConfig } from './types/config'
 
 const pageConfig: PageConfig = {
-  // 状态页的标题
-  title: "Teleseon Status Page",
-  // 状态页头部的链接
+  title: "Nextray Cluster Status Page",
   links: [
-    { link: 'https://teleseon.com/', label: 'mainpage', highlight: true },
-    { link: 'https://blog.teleseon.com/', label: 'blog' },
-    { link: 'https://cloud-mail.teleseon.com/login', label: 'mail' },
+    { link: 'https://github.com/Ryhn23', label: 'GitHub' },
+    { link: 'mailto:ray@nextray.org', label: 'Contact', highlight: true },
   ],
-  // 对监控项进行分组显示
   group: {
-    '🌐 Teleseon 主站': ['mainpage', ],
-    '📚 文章': ['blog','mail', ],
- //   '📚 资源存储': ['blog','ignorant_filecodebox', ],
+    ' Web Services': ['solarisnet_ui'],
+    ' Automation & AI': ['n8n_instance'],
   },
   maintenances: {
     upcomingColor: 'gray',
@@ -22,71 +17,43 @@ const pageConfig: PageConfig = {
 
 const workerConfig: WorkerConfig = {
   kvWriteCooldownMinutes: 3,
-  // 在这里定义您所有的监控项
   monitors: [
-    // 1. 博客监控项
     {
-      id: 'mainpage',
-      name: 'Teleseon 主站',
+      id: 'solarisnet_ui',
+      name: 'SolarisNet',
       method: 'GET',
-      target: 'https://teleseon.com/',
-      tooltip: '主站',
-      statusPageLink: 'https://teleseon.com/',
+      target: 'https://net.shorekeeper.me/', 
+      tooltip: 'Frontend Dashboard',
+      statusPageLink: 'https://net.shorekeeper.me/',
       hideLatencyChart: false,
       expectedCodes: [200],
       timeout: 10000,
-      headers: {
-        'User-Agent': 'Uptimeflare',
-      },
+      headers: { 'User-Agent': 'Uptimeflare' },
     },
-    // 2. FileCodeBox 监控项
     {
-      id: 'blog',
-      name: 'BLOG文章',
+      id: 'n8n_instance',
+      name: 'n8n Automation Engine',
       method: 'GET',
-      target: 'https://blog.teleseon.com/',
-      tooltip: '文章',
-      statusPageLink: 'https://blog.teleseon.com/',
+      target: 'https://n8n.nextray.online/healthz',
+      tooltip: 'Workflow Orchestrator',
+      statusPageLink: 'https://n8n.nextray.online/',
       timeout: 10000,
-      headers: {
-        'User-Agent': 'Uptimeflare',
-      },
-    },
-    // 3. OpenList 监控项
-    {
-      id: 'mail',
-      name: 'Mail邮件',
-      method: 'GET',
-      target: 'https://cloud-mail.teleseon.com/login',
-      tooltip: '邮件系统',
-      statusPageLink: 'https://cloud-mail.teleseon.com/login',
-      timeout: 10000,
-      headers: {
-        'User-Agent': 'Uptimeflare',
-      },
+      headers: { 'User-Agent': 'Uptimeflare' },
     }
   ],
-  
+
   callbacks: {
     onStatusChange: async (
-      env: any,
-      monitor: any,
-      isUp: boolean,
-      timeIncidentStart: number,
-      timeNow: number,
-      reason: string
-    ) => {},
+      env: any, monitor: any, isUp: boolean, timeIncidentStart: number, timeNow: number, reason: string
+    ) => {
+    },
     onIncident: async (
-      env: any,
-      monitor: any,
-      timeIncidentStart: number,
-      timeNow: number,
-      reason: string
-    ) => {},
+      env: any, monitor: any, timeIncidentStart: number, timeNow: number, reason: string
+    ) => {
+    },
   },
 }
 
-// 留空即可，不需要维护横幅
 const maintenances: MaintenanceConfig[] = []
 
 export { maintenances, pageConfig, workerConfig }
